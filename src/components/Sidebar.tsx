@@ -13,6 +13,7 @@ import {
   FileTextOutlined, 
   FolderOpenOutlined 
 } from '@ant-design/icons';
+import Image from 'next/image';
 
 const { Sider } = Layout;
 
@@ -92,13 +93,11 @@ const Sidebar: React.FC<SidebarProps> = ({ collapsed }) => {
   ];
 
   useEffect(() => {
-    // Determine the selected key and open keys based on the current route
     const path = router.pathname;
 
     let selected: string | undefined;
     let open: string[] = [];
 
-    // Iterate over menu items to find the active path and its parent keys
     menuItems.forEach(item => {
       if (item.children) {
         const foundChild = item.children.find(subItem => subItem.path === path);
@@ -113,15 +112,17 @@ const Sidebar: React.FC<SidebarProps> = ({ collapsed }) => {
 
     setSelectedKey(selected || '');
     setOpenKeys(open);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [router.pathname]);
 
   return (
     <Sider trigger={null} collapsible collapsed={collapsed}>
       <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', padding: '16px' }}>
-        <img
-          src="https://cdn0.iconfinder.com/data/icons/social-network-27/31/wordpress_logo_content_management_system_web_website_cms-512.png"
+        <Image
+          src="/wordpress.webp"
           alt="Logo"
-          style={{ width: '70px', height: '40px' }}
+          width={50}
+          height={20}
         />
       </div>
       <Menu

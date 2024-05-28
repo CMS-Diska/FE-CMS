@@ -1,9 +1,10 @@
 import CardContent from '@/components/Card';
 import LayoutAdmin from '@/components/Layout';
-import { Button, Input, Switch, Upload, Image } from 'antd';
+import { Button, Input, Switch, Upload, Image as AntdImage } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
 import { useState } from 'react';
 import type { UploadFile, UploadProps } from 'antd';
+import Image from 'next/image';
 
 type FileType = Parameters<NonNullable<UploadProps['beforeUpload']>>[0];
 
@@ -50,13 +51,12 @@ const HalamanDepan = () => {
     return (
         <>
             <LayoutAdmin>
-            <h1 className="text-dark font-bold text-3xl mb-4">Halaman Depan</h1>
+                <h1 className="text-dark font-bold text-3xl mb-4">Halaman Depan</h1>
                 <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-4'>
                     <CardContent>
                         <div className="flex items-center justify-between mb-4">
                             <span className='font-bold text-xl'>Tampilan Atas</span>
                             <div className='flex flex-col'>
-                                {/* <span>Tampilkan</span> */}
                                 <Switch defaultChecked />
                             </div>
                         </div>
@@ -95,7 +95,7 @@ const HalamanDepan = () => {
                                 {fileList.length >= 8 ? null : uploadButton}
                             </Upload>
                             {previewImage && (
-                                <Image
+                                <AntdImage
                                     wrapperStyle={{ display: 'none' }}
                                     preview={{
                                         visible: previewOpen,
@@ -119,7 +119,6 @@ const HalamanDepan = () => {
                         <div className="flex items-center justify-between mb-4">
                             <span className='font-bold text-xl'>Galeri Kegiatan</span>
                             <div className='flex flex-col'>
-                                {/* <span>Tampilkan</span> */}
                                 <Switch defaultChecked />
                             </div>
                         </div>
@@ -143,7 +142,6 @@ const HalamanDepan = () => {
                         <div className="flex items-center justify-between mb-4">
                             <span className='font-bold text-xl'>Pengaturan Artikel</span>
                             <div className='flex flex-col'>
-                                {/* <span>Tampilkan</span> */}
                                 <Switch defaultChecked />
                             </div>
                         </div>

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import type { TableColumnsType, TableProps } from 'antd';
 import { Button, Space, Table } from 'antd';
 import LayoutAdmin from '@/components/Layout';
+import Image from 'next/image';
 
 type OnChange = NonNullable<TableProps<DataType>['onChange']>;
 type Filters = Parameters<OnChange>[1];
@@ -24,7 +25,7 @@ const data: DataType[] = [
     key: '1',
     no: 1,
     nama: 'John Brown',
-    foto: 'https://via.placeholder.com/40',
+    foto: '/random40.png',
     tanggal: '2024-05-17',
     lokasi: 'New York No. 1 Lake Park',
     status: 'Active',
@@ -33,7 +34,7 @@ const data: DataType[] = [
     key: '2',
     no: 2,
     nama: 'Jim Green',
-    foto: 'https://via.placeholder.com/40',
+    foto: '/random40.png',
     tanggal: '2024-05-16',
     lokasi: 'London No. 1 Lake Park',
     status: 'Inactive',
@@ -42,7 +43,7 @@ const data: DataType[] = [
     key: '3',
     no: 3,
     nama: 'Joe Black',
-    foto: 'https://via.placeholder.com/40',
+    foto: '/random40.png',
     tanggal: '2024-05-15',
     lokasi: 'Sydney No. 1 Lake Park',
     status: 'Active',
@@ -51,7 +52,7 @@ const data: DataType[] = [
     key: '4',
     no: 4,
     nama: 'Jim Red',
-    foto: 'https://via.placeholder.com/40',
+    foto: '/random40.png',
     tanggal: '2024-05-14',
     lokasi: 'London No. 2 Lake Park',
     status: 'Inactive',
@@ -111,7 +112,9 @@ const App: React.FC = () => {
       title: 'Foto',
       dataIndex: 'foto',
       key: 'foto',
-      render: (text) => <img src={text} alt="foto" style={{ width: '40px', height: '40px' }} />,
+      render: (text) => (
+        <Image src={text} alt="foto" width={40} height={40} />
+      ),
     },
     {
       title: 'Tanggal',
@@ -166,10 +169,10 @@ const App: React.FC = () => {
   return (
     <>
       <LayoutAdmin>
-       <div className='flex justify-between'>
-       <h1 className="text-dark font-bold text-3xl mb-4">Galeri</h1>
-       <Button className='bg-green-600'>+ Add</Button>
-       </div>
+        <div className='flex justify-between'>
+          <h1 className="text-dark font-bold text-3xl mb-4">Galeri</h1>
+          <Button className='bg-green-600'>+ Add</Button>
+        </div>
         <Space style={{ marginBottom: 16 }}>
           <Button onClick={setAgeSort}>Sort age</Button>
           <Button onClick={clearFilters}>Clear filters</Button>
