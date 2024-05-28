@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Menu, Layout } from 'antd';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { 
   DashboardOutlined, 
   PictureOutlined, 
@@ -21,6 +22,10 @@ interface SidebarProps {
 }
 
 const Sidebar: React.FC<SidebarProps> = ({ collapsed }) => {
+  const router = useRouter();
+  const [selectedKey, setSelectedKey] = useState<string>('');
+  const [openKeys, setOpenKeys] = useState<string[]>([]);
+
   const menuItems = [
     {
       key: '1',
@@ -49,7 +54,7 @@ const Sidebar: React.FC<SidebarProps> = ({ collapsed }) => {
           key: '4',
           icon: <HomeOutlined />,
           label: 'Halaman Depan',
-          path: '/'
+          path: '/pengaturan/halamandepan'
         },
         {
           key: '5',
@@ -86,6 +91,30 @@ const Sidebar: React.FC<SidebarProps> = ({ collapsed }) => {
     }
   ];
 
+  useEffect(() => {
+    // Determine the selected key and open keys based on the current route
+    const path = router.pathname;
+
+    let selected: string | undefined;
+    let open: string[] = [];
+
+    // Iterate over menu items to find the active path and its parent keys
+    menuItems.forEach(item => {
+      if (item.children) {
+        const foundChild = item.children.find(subItem => subItem.path === path);
+        if (foundChild) {
+          selected = foundChild.key;
+          open = [item.key];
+        }
+      } else if (item.path === path) {
+        selected = item.key;
+      }
+    });
+
+    setSelectedKey(selected || '');
+    setOpenKeys(open);
+  }, [router.pathname]);
+
   return (
     <Sider trigger={null} collapsible collapsed={collapsed}>
       <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', padding: '16px' }}>
@@ -95,7 +124,13 @@ const Sidebar: React.FC<SidebarProps> = ({ collapsed }) => {
           style={{ width: '70px', height: '40px' }}
         />
       </div>
-      <Menu theme="dark" mode="inline">
+      <Menu
+        theme="dark"
+        mode="inline"
+        selectedKeys={[selectedKey]}
+        openKeys={openKeys}
+        onOpenChange={keys => setOpenKeys(keys)}
+      >
         {menuItems.map(item =>
           item.children ? (
             <Menu.SubMenu key={item.key} icon={item.icon} title={item.label}>

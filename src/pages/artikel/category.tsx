@@ -172,6 +172,7 @@ const App: React.FC = () => {
       sorter: (a, b) => a.no - b.no,
       sortOrder: sortedInfo.columnKey === 'no' ? sortedInfo.order : null,
       ellipsis: true,
+      className: 'no-column',
     },
     {
       title: 'Nama Berita',

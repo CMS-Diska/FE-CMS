@@ -20,7 +20,7 @@ const LayoutAdmin: React.FC<LayoutAdminProps> = ({ children }) => {
   };
 
   return (
-    <Layout style={{ height: '100vh' }}>
+    <Layout style={{ height: '100%' }}>
       <Sidebar collapsed={collapsed} onCollapse={handleToggle} />
       <Layout>
         <Navbar collapsed={collapsed} onToggle={handleToggle} />

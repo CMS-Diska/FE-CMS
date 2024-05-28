@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import type { TableColumnsType, TableProps } from 'antd';
-import { Button, Space, Table } from 'antd';
+import { Button, Space, Table, Image } from 'antd';
 import LayoutAdmin from '@/components/Layout';
 
 type OnChange = NonNullable<TableProps<DataType>['onChange']>;
@@ -109,7 +109,7 @@ const App: React.FC = () => {
       title: 'Foto',
       dataIndex: 'foto',
       key: 'foto',
-      render: (text) => <img src={text} alt="foto" style={{ width: '40px', height: '40px' }} />,
+      render: (text) => <Image src={text} alt="foto" width={40} height={40} />,
     },
     {
       title: 'Slug',
